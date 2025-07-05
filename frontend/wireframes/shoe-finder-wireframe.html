@@ -91,7 +91,7 @@
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-bottom: 30px;
+            margin-bottom: 50px;
         }
         
         .step-dot {
@@ -351,7 +351,7 @@
         <div class="header">
             <h1>👟 러닝화 파인더</h1>
             <p class="subtitle">당신의 발과 러닝 스타일에 맞는 러닝화를 찾아드립니다</p>
-            <p class="description">8단계 정밀 분석을 통해 20개 이상 브랜드에서 최적의 러닝화를 추천해드립니다</p>
+            <p class="description">8단계 설문을 통해 조건에 가장 맞는 러닝화를 추천해드립니다</p>
             
             <div class="progress-section">
                 <div class="progress-bar">
@@ -379,7 +379,6 @@
             <!-- 1단계: 기본 러닝 정보 -->
             <div class="question-container active" id="step1">
                 <h2 class="question-title">러닝 경험이 어느 정도이신가요?</h2>
-                <p class="question-subtitle"></p><!-- 기존 내용은 삭제했지만 이만큼의 간격을 두고는 싶어서 남겨놓은 태그 -->
                 
                 <div class="options-grid">
                     <div class="option-card" onclick="selectOption(this, 'beginner')">
@@ -402,7 +401,7 @@
                 </div>
                 <div style="margin-top: 30px;">
                     <h3 style="margin-bottom: 20px;">주간 러닝 거리는?</h3>
-                    <p class="question-subtitle">'1회 당 달리는 평균적인 거리 X 일주일에 달리는 횟수', 또는 이번주에 달린 거리를 합해보세요!</p><!-- 바로 위에 소제목이랑 시작점을 맞추고 싶다... -->
+                    <p class="question-subtitle" style="text-align: left; margin-top: -10px; margin-bottom: 15px;">'1회 당 달리는 평균적인 거리 X 일주일에 달리는 횟수', 또는 이번주에 달린 거리를 합해보세요!</p>
                     <div class="slider-container">
                         <input type="range" min="0" max="100" value="20" class="slider" id="distanceSlider" oninput="updateDistance(this.value)">
                         <div class="slider-labels">
@@ -610,6 +609,7 @@
                         </div>
                     </div>
                     <!-- '지금 통증이 있다면 병원에서 치료를 받으며 러닝을 당분간 쉬시는걸 권장합니다😇'라는 문구를 여기에 추가 -->
+                    <p style="text-align: left; margin-top: 20px; color: #666; font-size: 0.9em;">* 지금 통증이 있다면 병원에서 치료를 받으며 러닝을 당분간 쉬시는걸 권장합니다😇</p>
                 </div>
             </div>
             
@@ -625,7 +625,7 @@
                     </div>
                     
                     <div class="brand-card" onclick="toggleBrand(this, 'adidas')">
-                        <div style="font-size: 2em; margin-bottom: 10px;">◯</div>
+                        <div style="font-size: 2em; margin-bottom: 10px;">🅰️</div>
                         <div><strong>아디다스</strong></div>
                     </div>
                     
@@ -657,6 +657,11 @@
                     <div class="brand-card" onclick="toggleBrand(this, 'saucony')">
                         <div style="font-size: 2em; margin-bottom: 10px;">🚀</div>
                         <div><strong>써코니</strong></div>
+                    </div>
+
+                    <div class="brand-card" onclick="toggleBrand(this, 'onrunning')">
+                        <div style="font-size: 2em; margin-bottom: 10px;">◯</div>
+                        <div><strong>온러닝</strong></div>
                     </div>
                 </div>
             </div>
