@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>러닝화 파인더 - 세밀한 분석 시스템</title>
+    <title>러닝화 파인더 - 나에게 맞는 러닝화 찾기</title>
     <style>
         * {
             margin: 0;
@@ -349,8 +349,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏃‍♂️ 퍼펙트 러닝화 파인더</h1>
-            <p class="subtitle">당신의 발과 러닝 스타일에 완벽한 신발을 찾아드립니다</p>
+            <h1>👟 러닝화 파인더</h1>
+            <p class="subtitle">당신의 발과 러닝 스타일에 맞는 러닝화를 찾아드립니다</p>
             <p class="description">8단계 정밀 분석을 통해 20개 이상 브랜드에서 최적의 러닝화를 추천해드립니다</p>
             
             <div class="progress-section">
@@ -366,7 +366,7 @@
         
         <div class="question-section">
             <div class="step-indicator">
-                <div class="step-dot active" data-label="기본정보">1</div>
+                <div class="step-dot active" data-label="러닝경험">1</div>
                 <div class="step-dot" data-label="발모양">2</div>
                 <div class="step-dot" data-label="러닝패턴">3</div>
                 <div class="step-dot" data-label="훈련목적">4</div>
@@ -379,25 +379,37 @@
             <!-- 1단계: 기본 러닝 정보 -->
             <div class="question-container active" id="step1">
                 <h2 class="question-title">러닝 경험이 어느 정도이신가요?</h2>
-                <p class="question-subtitle">경험 수준에 따라 적합한 신발 유형이 달라집니다</p>
+                <p class="question-subtitle"></p><!-- 기존 내용은 삭제했지만 이만큼의 간격을 두고는 싶어서 남겨놓은 태그 -->
                 
                 <div class="options-grid">
                     <div class="option-card" onclick="selectOption(this, 'beginner')">
                         <span class="option-icon">🌱</span>
                         <div class="option-title">초보자</div>
-                        <div class="option-description">러닝을 시작한 지 6개월 미만<br>주 1-2회 정도</div>
+                        <div class="option-description">러닝을 시작한 지 6개월 미만<br>월 마일리지 100 미만</div>
                     </div>
                     
                     <div class="option-card" onclick="selectOption(this, 'intermediate')">
                         <span class="option-icon">🏃</span>
                         <div class="option-title">중급자</div>
-                        <div class="option-description">6개월-2년 경험<br>주 3-4회 정도</div>
+                        <div class="option-description">6개월 ~ 2년 경험<br>월 마일리지 100 이상 200 미만</div>
                     </div>
                     
                     <div class="option-card" onclick="selectOption(this, 'advanced')">
-                        <span class="option-icon">🏆</span>
+                        <span class="option-icon">🔥</span>
                         <div class="option-title">상급자</div>
-                        <div class="option-description">2년 이상 꾸준히<br>주 5회 이상, 대회 참가</div>
+                        <div class="option-description">2년 이상 달리는 중<br>월 마일리지 200 이상</div>
+                    </div>
+                </div>
+                <div style="margin-top: 30px;">
+                    <h3 style="margin-bottom: 20px;">주간 러닝 거리는?</h3>
+                    <p class="question-subtitle">'1회 당 달리는 평균적인 거리 X 일주일에 달리는 횟수', 또는 이번주에 달린 거리를 합해보세요!</p><!-- 바로 위에 소제목이랑 시작점을 맞추고 싶다... -->
+                    <div class="slider-container">
+                        <input type="range" min="0" max="100" value="20" class="slider" id="distanceSlider" oninput="updateDistance(this.value)">
+                        <div class="slider-labels">
+                            <span>0km</span>
+                            <span id="distanceValue">20km</span>
+                            <span>100km+</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -405,30 +417,30 @@
             <!-- 2단계: 발 형태 분석 -->
             <div class="question-container" id="step2">
                 <h2 class="question-title">발의 형태를 선택해주세요</h2>
-                <p class="question-subtitle">정확한 발 형태 분석으로 핏이 완벽한 신발을 찾아드립니다</p>
+                <p class="question-subtitle">발 형태 분석으로 핏이 맞는 브랜드/신발을 찾아드립니다</p>
                 
                 <div class="detailed-options">
                     <div class="detailed-option" onclick="selectDetailedOption(this, 'foot_width', 'narrow')">
                         <div class="icon">📏</div>
                         <div class="content">
-                            <div class="title">발볼이 좁음 (C-D 폭)</div>
-                            <div class="description">일반 신발이 헐렁하게 느껴짐, 아식스・미즈노 추천</div>
+                            <div class="title">발볼이 좁음</div>
+                            <div class="description">일반 신발이 헐렁하게 느껴지고, 발 길이에 맞춰서 신발을 구입하는 편이예요</div>
                         </div>
                     </div>
                     
                     <div class="detailed-option" onclick="selectDetailedOption(this, 'foot_width', 'normal')">
                         <div class="icon">📐</div>
                         <div class="content">
-                            <div class="title">발볼이 보통 (D-E 폭)</div>
-                            <div class="description">대부분의 브랜드 신발이 잘 맞음</div>
+                            <div class="title">발볼이 보통</div>
+                            <div class="description">'정사이즈'에 별로 실패하지 않는 편이예요.</div>
                         </div>
                     </div>
                     
                     <div class="detailed-option" onclick="selectDetailedOption(this, 'foot_width', 'wide')">
                         <div class="icon">📊</div>
                         <div class="content">
-                            <div class="title">발볼이 넓음 (E-EE 폭)</div>
-                            <div class="description">신발이 조이는 느낌, 뉴발란스・알트라 추천</div>
+                            <div class="title">발볼이 넓음</div>
+                            <div class="description">발 길이(또는 '정사이즈')에 맞춰서 신발을 사면 실패할 때가 많아요</div>
                         </div>
                     </div>
                 </div>
@@ -439,19 +451,19 @@
                         <div class="option-card" onclick="selectOption(this, 'flat_foot')">
                             <span class="option-icon">🦶</span>
                             <div class="option-title">평발</div>
-                            <div class="option-description">아치가 낮거나 없음<br>안정성 중시 신발 필요</div>
+                            <div class="option-description">아치가 낮거나 없어요<br>발이 금방 피로감을 느껴요</div>
                         </div>
                         
                         <div class="option-card" onclick="selectOption(this, 'normal_arch')">
                             <span class="option-icon">👣</span>
-                            <div class="option-title">정상 아치</div>
-                            <div class="option-description">적당한 아치 높이<br>대부분 신발 적합</div>
+                            <div class="option-title">적당한 아치 높이</div>
+                            <div class="option-description">그리 낮지도, 높지도 않은 것 같아요<br>발 아치 때문에 고민해본 적은 없어요</div>
                         </div>
                         
                         <div class="option-card" onclick="selectOption(this, 'high_arch')">
                             <span class="option-icon">🏔️</span>
                             <div class="option-title">높은 아치</div>
-                            <div class="option-description">아치가 높음<br>쿠셔닝 중시 신발 필요</div>
+                            <div class="option-description">받등이 높아요<br>발 앞뒤에 굳은 살이 있어요</div>
                         </div>
                     </div>
                 </div>
@@ -460,25 +472,25 @@
             <!-- 3단계: 러닝 패턴 분석 -->
             <div class="question-container" id="step3">
                 <h2 class="question-title">러닝할 때 어떻게 착지하시나요?</h2>
-                <p class="question-subtitle">착지 패턴에 따라 필요한 신발의 특성이 달라집니다</p>
+                <p class="question-subtitle">달릴 때 발 앞부터 닿나요? 아니면 뒤꿈치부터 닿나요?</p>
                 
                 <div class="options-grid">
                     <div class="option-card" onclick="selectOption(this, 'heel_strike')">
                         <span class="option-icon">🦵</span>
                         <div class="option-title">뒤꿈치 착지</div>
-                        <div class="option-description">뒤꿈치부터 착지<br>힐 쿠셔닝이 중요</div>
+                        <div class="option-description">뒤꿈치부터 착지<br>힐 풋(heel foot)</div>
                     </div>
                     
                     <div class="option-card" onclick="selectOption(this, 'midfoot_strike')">
                         <span class="option-icon">🦶</span>
                         <div class="option-title">중족부 착지</div>
-                        <div class="option-description">발 중앙부터 착지<br>균형잡힌 쿠셔닝</div>
+                        <div class="option-description">발 중앙부터 착지<br>미드 풋(mid foot)</div>
                     </div>
                     
                     <div class="option-card" onclick="selectOption(this, 'forefoot_strike')">
-                        <span class="option-icon">🔥</span>
+                        <span class="option-icon">👟</span>
                         <div class="option-title">전족부 착지</div>
-                        <div class="option-description">발가락 쪽부터 착지<br>반응성과 스피드 중시</div>
+                        <div class="option-description">발 앞(발가락쪽)부터 착지<br>포어 풋(fore foot)</div>
                     </div>
                 </div>
                 
@@ -488,16 +500,16 @@
                         <div class="detailed-option" onclick="selectDetailedOption(this, 'surface', 'road')">
                             <div class="icon">🛣️</div>
                             <div class="content">
-                                <div class="title">도로/아스팔트 (80% 이상)</div>
-                                <div class="description">로드 러닝화, 내구성과 쿠셔닝 중시</div>
+                                <div class="title">도로/아스팔트</div>
+                                <div class="description">헬스장 트레드밀도 여길 선택해주시면 됩니다</div>
                             </div>
                         </div>
                         
                         <div class="detailed-option" onclick="selectDetailedOption(this, 'surface', 'trail')">
                             <div class="icon">🏔️</div>
                             <div class="content">
-                                <div class="title">트레일/산길 (50% 이상)</div>
-                                <div class="description">트레일 러닝화, 그립과 보호 기능 중시</div>
+                                <div class="title">트레일/산길</div>
+                                <div class="description">산 속을 협객처럼 마치 라잌 어 닌자🥷</div>
                             </div>
                         </div>
                         
@@ -505,7 +517,7 @@
                             <div class="icon">🏃‍♂️</div>
                             <div class="content">
                                 <div class="title">트랙/경기장</div>
-                                <div class="description">경량화와 반응성 중시</div>
+                                <div class="description">고무 바닥재가 깔려 있는 트랙에서 달리는 편이예요</div>
                             </div>
                         </div>
                         
@@ -513,7 +525,7 @@
                             <div class="icon">🌐</div>
                             <div class="content">
                                 <div class="title">혼합 (도로+트레일)</div>
-                                <div class="description">올라운드 러닝화, 범용성 중시</div>
+                                <div class="description">길에서도 뛰고, 가끔 흙길에서도 달려요</div>
                             </div>
                         </div>
                     </div>
@@ -540,28 +552,16 @@
                     
                     <div class="option-card" onclick="selectOption(this, 'marathon')">
                         <span class="option-icon">🏁</span>
-                        <div class="option-title">마라톤 완주</div>
+                        <div class="option-title">장거리 훈련</div>
                         <div class="option-description">장거리 완주가 목표<br>쿠셔닝과 내구성 중시</div>
                     </div>
                     
                     <div class="option-card" onclick="selectOption(this, 'rehab')">
-                        <span class="option-icon">🩹</span>
-                        <div class="option-title">재활/회복</div>
-                        <div class="option-description">부상 회복 중<br>충격 흡수와 안정성 최우선</div>
+                        <span class="option-icon">🏃‍♂️</span>
+                        <div class="option-title">마라톤 완주</div>
+                        <div class="option-description">기록과 거리 모두 잡고 싶어요<br>반응성/내구성 두루 중시</div>
                     </div>
-                </div>
-                
-                <div style="margin-top: 30px;">
-                    <h3 style="margin-bottom: 20px;">주간 러닝 거리는?</h3>
-                    <div class="slider-container">
-                        <input type="range" min="0" max="100" value="20" class="slider" id="distanceSlider" oninput="updateDistance(this.value)">
-                        <div class="slider-labels">
-                            <span>0km</span>
-                            <span id="distanceValue">20km</span>
-                            <span>100km+</span>
-                        </div>
-                    </div>
-                </div>
+                </div>                
             </div>
             
             <!-- 5단계: 부상 이력 -->
@@ -574,7 +574,7 @@
                         <div class="icon">✅</div>
                         <div class="content">
                             <div class="title">부상 경험 없음</div>
-                            <div class="description">러닝으로 인한 부상이나 통증 경험이 없음</div>
+                            <div class="description">러닝으로 인한 부상이나 통증 경험이 없어요<br>(또는 추천 받을 신발에 부상 이력은 고려에 안넣고 싶어요)</div>
                         </div>
                     </div>
                     
@@ -582,7 +582,7 @@
                         <div class="icon">🦵</div>
                         <div class="content">
                             <div class="title">무릎 부상/통증</div>
-                            <div class="description">러너스 니, 무릎 통증 → 충격 흡수 강화 신발</div>
+                            <div class="description">뛰고나면 (또는 뛰고 몇일 뒤에) 무릎이 아파요...</div>
                         </div>
                     </div>
                     
@@ -590,7 +590,7 @@
                         <div class="icon">🦶</div>
                         <div class="content">
                             <div class="title">발목 부상/불안정</div>
-                            <div class="description">발목 염좌, 불안정감 → 안정성 강화 신발</div>
+                            <div class="description">발이 잘 접질려요... 뛸 때 발목이 불안정해요</div>
                         </div>
                     </div>
                     
@@ -598,7 +598,7 @@
                         <div class="icon">👣</div>
                         <div class="content">
                             <div class="title">족저근막염</div>
-                            <div class="description">발바닥 통증 → 아치 서포트 강화 신발</div>
+                            <div class="description">뛸 때 발바닥이 아파요...</div>
                         </div>
                     </div>
                     
@@ -606,9 +606,10 @@
                         <div class="icon">🦴</div>
                         <div class="content">
                             <div class="title">정강이 통증</div>
-                            <div class="description">신 스플린트 → 충격 흡수 극대화 신발</div>
+                            <div class="description">정강이가 아파서 병원에 가보니 '신 스플린트(shin splint)'라는 단어를 들어봤어요...</div>
                         </div>
                     </div>
+                    <!-- '지금 통증이 있다면 병원에서 치료를 받으며 러닝을 당분간 쉬시는걸 권장합니다😇'라는 문구를 여기에 추가 -->
                 </div>
             </div>
             
@@ -621,49 +622,41 @@
                     <div class="brand-card" onclick="toggleBrand(this, 'nike')">
                         <div style="font-size: 2em; margin-bottom: 10px;">✓</div>
                         <div><strong>나이키</strong></div>
-                        <div style="font-size: 0.9em; color: #666;">혁신적 기술, 스타일</div>
                     </div>
                     
                     <div class="brand-card" onclick="toggleBrand(this, 'adidas')">
                         <div style="font-size: 2em; margin-bottom: 10px;">◯</div>
                         <div><strong>아디다스</strong></div>
-                        <div style="font-size: 0.9em; color: #666;">부스트 쿠셔닝</div>
                     </div>
                     
                     <div class="brand-card" onclick="toggleBrand(this, 'asics')">
                         <div style="font-size: 2em; margin-bottom: 10px;">⚡</div>
                         <div><strong>아식스</strong></div>
-                        <div style="font-size: 0.9em; color: #666;">일본 기술력, 안정성</div>
                     </div>
                     
                     <div class="brand-card" onclick="toggleBrand(this, 'newbalance')">
                         <div style="font-size: 2em; margin-bottom: 10px;">⚖️</div>
                         <div><strong>뉴발란스</strong></div>
-                        <div style="font-size: 0.9em; color: #666;">넓은 폭, 편안함</div>
                     </div>
                     
                     <div class="brand-card" onclick="toggleBrand(this, 'brooks')">
                         <div style="font-size: 2em; margin-bottom: 10px;">🏃</div>
                         <div><strong>브룩스</strong></div>
-                        <div style="font-size: 0.9em; color: #666;">러닝 전문</div>
                     </div>
                     
                     <div class="brand-card" onclick="toggleBrand(this, 'hoka')">
                         <div style="font-size: 2em; margin-bottom: 10px;">☁️</div>
                         <div><strong>호카</strong></div>
-                        <div style="font-size: 0.9em; color: #666;">맥시멀 쿠셔닝</div>
                     </div>
                     
                     <div class="brand-card" onclick="toggleBrand(this, 'mizuno')">
                         <div style="font-size: 2em; margin-bottom: 10px;">🌊</div>
                         <div><strong>미즈노</strong></div>
-                        <div style="font-size: 0.9em; color: #666;">웨이브 기술</div>
                     </div>
                     
                     <div class="brand-card" onclick="toggleBrand(this, 'saucony')">
                         <div style="font-size: 2em; margin-bottom: 10px;">🚀</div>
                         <div><strong>써코니</strong></div>
-                        <div style="font-size: 0.9em; color: #666;">레이싱 특화</div>
                     </div>
                 </div>
             </div>
@@ -671,64 +664,29 @@
             <!-- 7단계: 예산 -->
             <div class="question-container" id="step7">
                 <h2 class="question-title">예산 범위를 선택해주세요</h2>
-                <p class="question-subtitle">가격대별로 최고의 가성비 제품을 추천해드립니다</p>
+                <p class="question-subtitle">예산을 고려해서 제품을 추천해드립니다</p>
                 
                 <div class="options-grid">
                     <div class="option-card" onclick="selectOption(this, 'budget_low')">
                         <span class="option-icon">💰</span>
                         <div class="option-title">10만원 이하</div>
-                        <div class="option-description">입문자용, 기본 기능<br>가성비 중시</div>
+                        <div class="option-description">입문자용, 기본 기능<br>아직 러닝화에 큰 돈을 투자하고 싶진 않아요</div>
                     </div>
                     
                     <div class="option-card" onclick="selectOption(this, 'budget_mid')">
-                        <span class="option-icon">💎</span>
+                        <span class="option-icon">👟</span>
                         <div class="option-title">10-20만원</div>
-                        <div class="option-description">중급자용, 고급 기술<br>성능과 가격의 균형</div>
+                        <div class="option-description">대부분 러닝화의 가격대<br>성능과 가격에 균형을 맞추고 싶어요</div>
                     </div>
                     
                     <div class="option-card" onclick="selectOption(this, 'budget_high')">
-                        <span class="option-icon">👑</span>
+                        <span class="option-icon">💎</span>
                         <div class="option-title">20만원 이상</div>
-                        <div class="option-description">프리미엄 제품<br>최고 성능, 가격 무관</div>
+                        <div class="option-description">프리미엄 제품<br>돈은 많으니(또는 할부할 각오는 되어있으니) 최고로 좋은 신발 추천해주세요</div>
                     </div>
                 </div>
                 
-                <div style="margin-top: 30px;">
-                    <h3 style="margin-bottom: 20px;">기타 고려사항</h3>
-                    <div class="detailed-options">
-                        <div class="detailed-option" onclick="selectDetailedOption(this, 'consideration', 'durability')">
-                            <div class="icon">🛡️</div>
-                            <div class="content">
-                                <div class="title">내구성 우선</div>
-                                <div class="description">오래 신을 수 있는 튼튼한 신발</div>
-                            </div>
-                        </div>
-                        
-                        <div class="detailed-option" onclick="selectDetailedOption(this, 'consideration', 'style')">
-                            <div class="icon">👟</div>
-                            <div class="content">
-                                <div class="title">디자인/스타일 중시</div>
-                                <div class="description">일상복과도 잘 어울리는 디자인</div>
-                            </div>
-                        </div>
-                        
-                        <div class="detailed-option" onclick="selectDetailedOption(this, 'consideration', 'weight')">
-                            <div class="icon">🪶</div>
-                            <div class="content">
-                                <div class="title">경량성 우선</div>
-                                <div class="description">가벼운 신발로 스피드 향상</div>
-                            </div>
-                        </div>
-                        
-                        <div class="detailed-option" onclick="selectDetailedOption(this, 'consideration', 'eco')">
-                            <div class="icon">🌱</div>
-                            <div class="content">
-                                <div class="title">친환경 제품</div>
-                                <div class="description">재활용 소재, 지속가능성 고려</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- 원래 있던 기타 고려사항은 좀 더 세분화해서 반영해보기로 (예: 디자인은 색상, 내구성은 재질 등) -->
             </div>
             
             <!-- 8단계: 최종 확인 -->
