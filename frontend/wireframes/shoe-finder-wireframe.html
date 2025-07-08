@@ -71,7 +71,7 @@
         .progress-fill {
             background: white;
             height: 100%;
-            width: 12.5%;
+            width: 0%;
             border-radius: 4px;
             transition: width 0.3s ease;
         }
@@ -344,6 +344,156 @@
             font-size: 0.9em;
             color: #666;
         }
+
+        .shoe-size-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            font-size: 1.1em;
+            text-align: center;
+            transition: border-color 0.3s ease;
+        }
+
+        .shoe-size-input:focus {
+            outline: none;
+            border-color: #4CAF50;
+        }
+
+        .consent-container {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .consent-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.95em;
+            color: #333;
+        }
+
+        .consent-checkbox {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            accent-color: #4CAF50;
+        }
+
+        .result-section {
+            text-align: left;
+        }
+
+        .main-recommendation {
+            background: #f8f9fa;
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .shoe-image-main {
+            flex-basis: 350px;
+            flex-grow: 1;
+        }
+
+        .shoe-image-main img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .shoe-details {
+            flex-basis: 300px;
+            flex-grow: 2;
+        }
+
+        .best-for-you-tag {
+            background: #FF6900;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .shoe-name {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .shoe-reason {
+            font-size: 1em;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .shoe-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .shoe-tags span {
+            background: #e9ecef;
+            color: #333;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-size: 0.9em;
+        }
+
+        .alternatives-section {
+            text-align: center;
+        }
+
+        .alternatives-title {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .alternatives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .alternative-card {
+            background: #ffffff;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .alternative-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: #45a049;
+        }
+
+        .shoe-image-alt img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .shoe-name-alt {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -351,14 +501,14 @@
         <div class="header">
             <h1>👟 러닝화 파인더</h1>
             <p class="subtitle">당신의 발과 러닝 스타일에 맞는 러닝화를 찾아드립니다</p>
-            <p class="description">8단계 설문을 통해 조건에 가장 맞는 러닝화를 추천해드립니다</p>
+            <p class="description">9단계 설문을 통해 조건에 가장 맞는 러닝화를 추천해드립니다</p>
             
             <div class="progress-section">
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
                 <div class="step-info">
-                    <span>1단계 / 8단계</span>
+                    <span id="stepCounter">1단계 / 9단계</span>
                     <span>예상 소요시간: 3-5분</span>
                 </div>
             </div>
@@ -366,34 +516,95 @@
         
         <div class="question-section">
             <div class="step-indicator">
-                <div class="step-dot active" data-label="러닝경험">1</div>
-                <div class="step-dot" data-label="발모양">2</div>
-                <div class="step-dot" data-label="러닝패턴">3</div>
-                <div class="step-dot" data-label="훈련목적">4</div>
-                <div class="step-dot" data-label="부상이력">5</div>
-                <div class="step-dot" data-label="브랜드선호">6</div>
-                <div class="step-dot" data-label="예산">7</div>
-                <div class="step-dot" data-label="최종확인">8</div>
+                <div class="step-dot active" data-label="개인정보">1</div>
+                <div class="step-dot" data-label="러닝경험">2</div>
+                <div class="step-dot" data-label="발모양">3</div>
+                <div class="step-dot" data-label="러닝패턴">4</div>
+                <div class="step-dot" data-label="훈련목적">5</div>
+                <div class="step-dot" data-label="부상이력">6</div>
+                <div class="step-dot" data-label="브랜드선호">7</div>
+                <div class="step-dot" data-label="예산">8</div>
+                <div class="step-dot" data-label="최종확인">9</div>
+                <div class="step-dot" data-label="결과보기">10</div>
             </div>
             
-            <!-- 1단계: 기본 러닝 정보 -->
+            <!-- 1단계: 개인 정보 -->
             <div class="question-container active" id="step1">
+                <h2 class="question-title">개인 정보를 알려주세요</h2>
+                <p class="question-subtitle">더욱 정확한 추천을 위해 필요한 정보입니다.</p>
+            
+                <div style="margin-bottom: 40px;">
+                    <h3 style="text-align: center; font-weight: 600; color: #333; margin-bottom: 20px;">성별</h3>
+                    <div class="options-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="option-card" onclick="selectOption(this, 'gender', 'female')">
+                            <span class="option-icon">👩</span>
+                            <div class="option-title">여성</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 'gender', 'male')">
+                            <span class="option-icon">👨</span>
+                            <div class="option-title">남성</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 'gender', 'other')">
+                            <span class="option-icon">👤</span>
+                            <div class="option-title">기타</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 40px;">
+                    <h3 style="text-align: center; font-weight: 600; color: #333; margin-bottom: 20px;">연령대</h3>
+                    <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));">
+                        <div class="option-card" onclick="selectOption(this, 'age', '20s')">
+                            <div class="option-title">20대</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 'age', '30s')">
+                            <div class="option-title">30대</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 'age', '40s')">
+                            <div class="option-title">40대</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 'age', '50s')">
+                            <div class="option-title">50대</div>
+                        </div>
+                        <div class="option-card" onclick="selectOption(this, 'age', '60s+')">
+                            <div class="option-title">60대 이상</div>
+                        </div>
+                    </div>
+                </div>
+            
+                <div style="margin-bottom: 40px;">
+                    <h3 style="text-align: center; font-weight: 600; color: #333; margin-bottom: 20px;">신발 사이즈 (mm)</h3>
+                    <div style="max-width: 300px; margin: 0 auto;">
+                        <input type="number" step="5" placeholder="예: 265" class="shoe-size-input" onchange="userChoices.shoeSize = this.value;">
+                    </div>
+                </div>
+            
+                <div class="consent-container">
+                    <label class="consent-label">
+                        <input type="checkbox" id="privacyConsent" class="consent-checkbox">
+                        개인정보 수집 및 이용에 동의합니다. (필수)
+                    </label>
+                </div>
+            </div>
+
+            <!-- 2단계: 기본 러닝 정보 -->
+            <div class="question-container" id="step2">
                 <h2 class="question-title">러닝 경험이 어느 정도이신가요?</h2>
                 
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(this, 'beginner')">
+                    <div class="option-card" onclick="selectOption(this, 'experience', 'beginner')">
                         <span class="option-icon">🌱</span>
                         <div class="option-title">초보자</div>
                         <div class="option-description">러닝을 시작한 지 6개월 미만<br>월 마일리지 100 미만</div>
                     </div>
                     
-                    <div class="option-card" onclick="selectOption(this, 'intermediate')">
+                    <div class="option-card" onclick="selectOption(this, 'experience', 'intermediate')">
                         <span class="option-icon">🏃</span>
                         <div class="option-title">중급자</div>
                         <div class="option-description">6개월 ~ 2년 경험<br>월 마일리지 100 이상 200 미만</div>
                     </div>
                     
-                    <div class="option-card" onclick="selectOption(this, 'advanced')">
+                    <div class="option-card" onclick="selectOption(this, 'experience', 'advanced')">
                         <span class="option-icon">🔥</span>
                         <div class="option-title">상급자</div>
                         <div class="option-description">2년 이상 달리는 중<br>월 마일리지 200 이상</div>
@@ -413,8 +624,8 @@
                 </div>
             </div>
             
-            <!-- 2단계: 발 형태 분석 -->
-            <div class="question-container" id="step2">
+            <!-- 3단계: 발 형태 분석 -->
+            <div class="question-container" id="step3">
                 <h2 class="question-title">발의 형태를 선택해주세요</h2>
                 <p class="question-subtitle">발 형태 분석으로 핏이 맞는 브랜드/신발을 찾아드립니다</p>
                 
@@ -447,19 +658,19 @@
                 <div style="margin-top: 30px;">
                     <h3 style="margin-bottom: 20px;">발 아치 높이는?</h3>
                     <div class="options-grid">
-                        <div class="option-card" onclick="selectOption(this, 'flat_foot')">
+                        <div class="option-card" onclick="selectOption(this, 'arch', 'flat_foot')">
                             <span class="option-icon">🦶</span>
                             <div class="option-title">평발</div>
                             <div class="option-description">아치가 낮거나 없어요<br>발이 금방 피로감을 느껴요</div>
                         </div>
                         
-                        <div class="option-card" onclick="selectOption(this, 'normal_arch')">
+                        <div class="option-card" onclick="selectOption(this, 'arch', 'normal_arch')">
                             <span class="option-icon">👣</span>
                             <div class="option-title">적당한 아치 높이</div>
                             <div class="option-description">그리 낮지도, 높지도 않은 것 같아요<br>발 아치 때문에 고민해본 적은 없어요</div>
                         </div>
                         
-                        <div class="option-card" onclick="selectOption(this, 'high_arch')">
+                        <div class="option-card" onclick="selectOption(this, 'arch', 'high_arch')">
                             <span class="option-icon">🏔️</span>
                             <div class="option-title">높은 아치</div>
                             <div class="option-description">받등이 높아요<br>발 앞뒤에 굳은 살이 있어요</div>
@@ -468,25 +679,25 @@
                 </div>
             </div>
             
-            <!-- 3단계: 러닝 패턴 분석 -->
-            <div class="question-container" id="step3">
+            <!-- 4단계: 러닝 패턴 분석 -->
+            <div class="question-container" id="step4">
                 <h2 class="question-title">러닝할 때 어떻게 착지하시나요?</h2>
                 <p class="question-subtitle">달릴 때 발 앞부터 닿나요? 아니면 뒤꿈치부터 닿나요?</p>
                 
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(this, 'heel_strike')">
+                    <div class="option-card" onclick="selectOption(this, 'strike', 'heel_strike')">
                         <span class="option-icon">🦵</span>
                         <div class="option-title">뒤꿈치 착지</div>
                         <div class="option-description">뒤꿈치부터 착지<br>힐 풋(heel foot)</div>
                     </div>
                     
-                    <div class="option-card" onclick="selectOption(this, 'midfoot_strike')">
+                    <div class="option-card" onclick="selectOption(this, 'strike', 'midfoot_strike')">
                         <span class="option-icon">🦶</span>
                         <div class="option-title">중족부 착지</div>
                         <div class="option-description">발 중앙부터 착지<br>미드 풋(mid foot)</div>
                     </div>
                     
-                    <div class="option-card" onclick="selectOption(this, 'forefoot_strike')">
+                    <div class="option-card" onclick="selectOption(this, 'strike', 'forefoot_strike')">
                         <span class="option-icon">👟</span>
                         <div class="option-title">전족부 착지</div>
                         <div class="option-description">발 앞(발가락쪽)부터 착지<br>포어 풋(fore foot)</div>
@@ -531,31 +742,31 @@
                 </div>
             </div>
             
-            <!-- 4단계: 훈련 목적 -->
-            <div class="question-container" id="step4">
+            <!-- 5단계: 훈련 목적 -->
+            <div class="question-container" id="step5">
                 <h2 class="question-title">주된 러닝 목적은 무엇인가요?</h2>
                 <p class="question-subtitle">목적에 따라 신발의 우선순위가 달라집니다</p>
                 
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(this, 'health')">
+                    <div class="option-card" onclick="selectOption(this, 'purpose', 'health')">
                         <span class="option-icon">💪</span>
                         <div class="option-title">건강 관리</div>
                         <div class="option-description">체중 감량, 체력 향상<br>편안함과 안정성 중시</div>
                     </div>
                     
-                    <div class="option-card" onclick="selectOption(this, 'record')">
+                    <div class="option-card" onclick="selectOption(this, 'purpose', 'record')">
                         <span class="option-icon">⏱️</span>
                         <div class="option-title">기록 단축</div>
                         <div class="option-description">개인 기록 향상<br>반응성과 경량성 중시</div>
                     </div>
                     
-                    <div class="option-card" onclick="selectOption(this, 'marathon')">
+                    <div class="option-card" onclick="selectOption(this, 'purpose', 'marathon')">
                         <span class="option-icon">🏁</span>
                         <div class="option-title">장거리 훈련</div>
                         <div class="option-description">장거리 완주가 목표<br>쿠셔닝과 내구성 중시</div>
                     </div>
                     
-                    <div class="option-card" onclick="selectOption(this, 'rehab')">
+                    <div class="option-card" onclick="selectOption(this, 'purpose', 'rehab')">
                         <span class="option-icon">🏃‍♂️</span>
                         <div class="option-title">마라톤 완주</div>
                         <div class="option-description">기록과 거리 모두 잡고 싶어요<br>반응성/내구성 두루 중시</div>
@@ -563,8 +774,8 @@
                 </div>                
             </div>
             
-            <!-- 5단계: 부상 이력 -->
-            <div class="question-container" id="step5">
+            <!-- 6단계: 부상 이력 -->
+            <div class="question-container" id="step6">
                 <h2 class="question-title">러닝 관련 부상 경험이 있으신가요?</h2>
                 <p class="question-subtitle">부상 이력을 고려해 예방에 도움되는 신발을 추천해드립니다</p>
                 
@@ -608,17 +819,17 @@
                             <div class="description">정강이가 아파서 병원에 가보니 '신 스플린트(shin splint)'라는 단어를 들어봤어요...</div>
                         </div>
                     </div>
-                    <!-- '지금 통증이 있다면 병원에서 치료를 받으며 러닝을 당분간 쉬시는걸 권장합니다😇'라는 문구를 여기에 추가 -->
                     <p style="text-align: left; margin-top: 20px; color: #666; font-size: 0.9em;">* 지금 통증이 있다면 병원에서 치료를 받으며 러닝을 당분간 쉬시는걸 권장합니다😇</p>
                 </div>
             </div>
             
-            <!-- 6단계: 브랜드 선호도 -->
-            <div class="question-container" id="step6">
+            <!-- 7단계: 브랜드 선호도 -->
+            <div class="question-container" id="step7">
                 <h2 class="question-title">선호하는 브랜드가 있으신가요?</h2>
                 <p class="question-subtitle">브랜드별 특성을 고려해 추천해드립니다 (복수 선택 가능)</p>
                 
                 <div class="brand-grid">
+                                    <div class="brand-grid">
                     <div class="brand-card" onclick="toggleBrand(this, 'nike')">
                         <div style="font-size: 2em; margin-bottom: 10px;">✓</div>
                         <div><strong>나이키</strong></div>
@@ -664,38 +875,37 @@
                         <div><strong>온러닝</strong></div>
                     </div>
                 </div>
+                </div>
             </div>
             
-            <!-- 7단계: 예산 -->
-            <div class="question-container" id="step7">
+            <!-- 8단계: 예산 -->
+            <div class="question-container" id="step8">
                 <h2 class="question-title">예산 범위를 선택해주세요</h2>
                 <p class="question-subtitle">예산을 고려해서 제품을 추천해드립니다</p>
                 
                 <div class="options-grid">
-                    <div class="option-card" onclick="selectOption(this, 'budget_low')">
+                    <div class="option-card" onclick="selectOption(this, 'budget', 'budget_low')">
                         <span class="option-icon">💰</span>
                         <div class="option-title">10만원 이하</div>
                         <div class="option-description">입문자용, 기본 기능<br>아직 러닝화에 큰 돈을 투자하고 싶진 않아요</div>
                     </div>
                     
-                    <div class="option-card" onclick="selectOption(this, 'budget_mid')">
+                    <div class="option-card" onclick="selectOption(this, 'budget', 'budget_mid')">
                         <span class="option-icon">👟</span>
                         <div class="option-title">10-20만원</div>
                         <div class="option-description">대부분 러닝화의 가격대<br>성능과 가격에 균형을 맞추고 싶어요</div>
                     </div>
                     
-                    <div class="option-card" onclick="selectOption(this, 'budget_high')">
+                    <div class="option-card" onclick="selectOption(this, 'budget', 'budget_high')">
                         <span class="option-icon">💎</span>
                         <div class="option-title">20만원 이상</div>
                         <div class="option-description">프리미엄 제품<br>돈은 많으니(또는 할부할 각오는 되어있으니) 최고로 좋은 신발 추천해주세요</div>
                     </div>
                 </div>
-                
-                <!-- 원래 있던 기타 고려사항은 좀 더 세분화해서 반영해보기로 (예: 디자인은 색상, 내구성은 재질 등) -->
             </div>
             
-            <!-- 8단계: 최종 확인 -->
-            <div class="question-container" id="step8">
+            <!-- 9단계: 최종 확인 -->
+            <div class="question-container" id="step9">
                 <h2 class="question-title">선택하신 정보를 확인해주세요</h2>
                 <p class="question-subtitle">정보가 정확하다면 맞춤 추천을 받아보세요!</p>
                 
@@ -705,30 +915,33 @@
                         
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
                             <div>
+                                <strong>👤 개인 정보:</strong>
+                                <div id="summaryPersonalInfo" style="color: #666;">-</div>
+                            </div>
+                            <div>
                                 <strong>🏃‍♂️ 러닝 경험:</strong>
                                 <div id="summaryExperience" style="color: #666;">-</div>
                             </div>
-                            
                             <div>
                                 <strong>👣 발 형태:</strong>
                                 <div id="summaryFoot" style="color: #666;">-</div>
                             </div>
-                            
                             <div>
                                 <strong>🏃 러닝 패턴:</strong>
                                 <div id="summaryPattern" style="color: #666;">-</div>
                             </div>
-                            
                             <div>
                                 <strong>🎯 훈련 목적:</strong>
                                 <div id="summaryPurpose" style="color: #666;">-</div>
                             </div>
-                            
                             <div>
                                 <strong>🩹 부상 이력:</strong>
                                 <div id="summaryInjury" style="color: #666;">-</div>
                             </div>
-                            
+                             <div>
+                                <strong>⭐ 브랜드 선호:</strong>
+                                <div id="summaryBrands" style="color: #666;">-</div>
+                            </div>
                             <div>
                                 <strong>💰 예산:</strong>
                                 <div id="summaryBudget" style="color: #666;">-</div>
@@ -736,27 +949,50 @@
                         </div>
                     </div>
                 </div>
-                
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <div style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%); color: white; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-                        <h3 style="margin-bottom: 10px;">🎉 분석 완료!</h3>
-                        <p>당신의 러닝 스타일에 완벽한 신발 3가지를 추천해드리겠습니다</p>
+            </div>
+
+            <!-- 10단계: 추천 결과 -->
+            <div class="question-container" id="step10">
+                <h2 class="question-title">당신을 위한 최고의 러닝화</h2>
+                <p class="question-subtitle">수집된 정보를 바탕으로 가장 적합한 신발을 추천해드립니다.</p>
+
+                <div class="result-section">
+                    <div class="main-recommendation">
+                        <div class="shoe-image-main">
+                            <img src="https://via.placeholder.com/400x300.png?text=Best+Shoe" alt="추천 신발 이미지">
+                        </div>
+                        <div class="shoe-details">
+                            <span class="best-for-you-tag">Best For You</span>
+                            <h3 class="shoe-name">나이키 페가수스 41</h3>
+                            <p class="shoe-reason">
+                                <strong>추천 이유:</strong> 중립적인 쿠셔닝과 뛰어난 반응성으로 중급자에게 가장 적합하며, 특히 도로 러닝과 건강 관리 목적에 부합합니다.
+                            </p>
+                            <div class="shoe-tags">
+                                <span>#쿠셔닝</span>
+                                <span>#안정성</span>
+                                <span>#데일리</span>
+                            </div>
+                            <button class="btn btn-primary" style="width: 100%; margin-top: 20px;">상세 정보 보기</button>
+                        </div>
                     </div>
-                    
-                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
-                        <div style="background: white; border: 2px solid #4CAF50; border-radius: 8px; padding: 15px;">
-                            <div style="font-size: 1.5em; margin-bottom: 5px;">🥇</div>
-                            <div style="font-size: 0.9em; color: #666;">최적 매칭</div>
-                        </div>
-                        
-                        <div style="background: white; border: 2px solid #FF9800; border-radius: 8px; padding: 15px;">
-                            <div style="font-size: 1.5em; margin-bottom: 5px;">🥈</div>
-                            <div style="font-size: 0.9em; color: #666;">대안 추천</div>
-                        </div>
-                        
-                        <div style="background: white; border: 2px solid #2196F3; border-radius: 8px; padding: 15px;">
-                            <div style="font-size: 1.5em; margin-bottom: 5px;">🥉</div>
-                            <div style="font-size: 0.9em; color: #666;">가성비 선택</div>
+
+                    <div class="alternatives-section">
+                        <h3 class="alternatives-title">다른 추천 신발</h3>
+                        <div class="alternatives-grid">
+                            <div class="alternative-card">
+                                <div class="shoe-image-alt">
+                                    <img src="https://via.placeholder.com/200x150.png?text=Alternative+1" alt="대안 신발 1">
+                                </div>
+                                <h4 class="shoe-name-alt">아식스 젤-카야노 31</h4>
+                                <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;">상세 정보 보기</button>
+                            </div>
+                            <div class="alternative-card">
+                                <div class="shoe-image-alt">
+                                    <img src="https://via.placeholder.com/200x150.png?text=Alternative+2" alt="대안 신발 2">
+                                </div>
+                                <h4 class="shoe-name-alt">호카 클리프톤 9</h4>
+                                <button class="btn btn-secondary" style="width: 100%; margin-top: 10px;">상세 정보 보기</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -771,37 +1007,40 @@
     
     <script>
         let currentStep = 1;
-        const totalSteps = 8;
-        let userChoices = {};
-        let selectedBrands = [];
+        const totalSteps = 10;
+        let userChoices = {
+            selectedBrands: []
+        };
         
         function updateProgress() {
-            const progressFill = document.getElementById('progressFill');
-            const progressPercent = (currentStep / totalSteps) * 100;
-            progressFill.style.width = progressPercent + '%';
+            const progressPercent = ((currentStep - 1) / (totalSteps - 1)) * 100;
+            document.getElementById('progressFill').style.width = progressPercent + '%';
             
-            // Update step indicators
             document.querySelectorAll('.step-dot').forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
                 if (index < currentStep - 1) {
                     dot.classList.add('completed');
-                    dot.classList.remove('active');
                 } else if (index === currentStep - 1) {
                     dot.classList.add('active');
-                    dot.classList.remove('completed');
-                } else {
-                    dot.classList.remove('active', 'completed');
                 }
             });
             
-            // Update step info
-            document.querySelector('.step-info span:first-child').textContent = `${currentStep}단계 / ${totalSteps}단계`;
-            
-            // Update buttons
+            document.getElementById('stepCounter').textContent = `${currentStep}단계 / ${totalSteps}단계`;
             document.getElementById('prevBtn').disabled = currentStep === 1;
+            
             const nextBtn = document.getElementById('nextBtn');
-            if (currentStep === totalSteps) {
+            const actionButtons = document.querySelector('.action-buttons');
+
+            if (currentStep === totalSteps) { // Last step (results)
+                actionButtons.style.display = 'none'; // Hide buttons on result page
+            } else {
+                actionButtons.style.display = 'flex';
+            }
+
+            if (currentStep === totalSteps - 1) { // Summary page
                 nextBtn.textContent = '추천 받기';
                 nextBtn.style.background = 'linear-gradient(135deg, #FF6900 0%, #FF8533 100%)';
+                updateSummary();
             } else {
                 nextBtn.textContent = '다음';
                 nextBtn.style.background = 'linear-gradient(135deg, #4CAF50 0%, #45a049 100%)';
@@ -813,16 +1052,13 @@
                 container.classList.remove('active');
             });
             document.getElementById(`step${step}`).classList.add('active');
+            updateProgress();
         }
         
         function nextStep() {
             if (currentStep < totalSteps) {
                 currentStep++;
                 showStep(currentStep);
-                updateProgress();
-            } else {
-                // 최종 추천 실행
-                showRecommendations();
             }
         }
         
@@ -830,62 +1066,80 @@
             if (currentStep > 1) {
                 currentStep--;
                 showStep(currentStep);
-                updateProgress();
             }
         }
         
-        function selectOption(element, value) {
-            // Remove selected class from siblings
+        function selectOption(element, category, value) {
             element.parentNode.querySelectorAll('.option-card').forEach(card => {
                 card.classList.remove('selected');
             });
-            
-            // Add selected class to clicked option
             element.classList.add('selected');
-            
-            // Store choice
-            userChoices[`step${currentStep}`] = value;
+            userChoices[category] = value;
         }
         
         function selectDetailedOption(element, category, value) {
-            // Remove selected class from same category
-            element.parentNode.querySelectorAll('.detailed-option').forEach(option => {
+            const parent = element.closest('.detailed-options');
+            parent.querySelectorAll('.detailed-option').forEach(option => {
                 option.classList.remove('selected');
             });
-            
-            // Add selected class to clicked option
             element.classList.add('selected');
             
-            // Store choice
-            if (!userChoices[`step${currentStep}`]) {
-                userChoices[`step${currentStep}`] = {};
+            const stepId = element.closest('.question-container').id.replace('step', '');
+            const stepKey = `step${stepId}`;
+            if (!userChoices[stepKey]) {
+                userChoices[stepKey] = {};
             }
-            userChoices[`step${currentStep}`][category] = value;
+            userChoices[stepKey][category] = value;
         }
         
         function toggleBrand(element, brand) {
             element.classList.toggle('selected');
-            
-            if (selectedBrands.includes(brand)) {
-                selectedBrands = selectedBrands.filter(b => b !== brand);
+            const index = userChoices.selectedBrands.indexOf(brand);
+            if (index > -1) {
+                userChoices.selectedBrands.splice(index, 1);
             } else {
-                selectedBrands.push(brand);
+                userChoices.selectedBrands.push(brand);
             }
-            
-            userChoices.selectedBrands = selectedBrands;
         }
         
         function updateDistance(value) {
             document.getElementById('distanceValue').textContent = value + 'km';
             userChoices.weeklyDistance = value;
         }
-        
-        function showRecommendations() {
-            alert('🎉 분석 완료!\n\n당신에게 추천하는 러닝화:\n\n1. 아식스 젤-님버스 25 (94% 매칭)\n2. 브룩스 고스트 15 (89% 매칭)\n3. 뉴발란스 Fresh Foam X 1080v12 (87% 매칭)\n\n자세한 추천 이유와 구매 링크는 결과 페이지에서 확인하세요!');
+
+        function updateSummary() {
+            const summaryMapping = {
+                gender: { "male": "남성", "female": "여성", "other": "기타" },
+                age: { "20s": "20대", "30s": "30대", "40s": "40대", "50s": "50대", "60s+": "60대 이상" },
+                experience: { "beginner": "초보자", "intermediate": "중급자", "advanced": "상급자" },
+                arch: { "flat_foot": "평발", "normal_arch": "보통", "high_arch": "높은 아치" },
+                strike: { "heel_strike": "뒤꿈치 착지", "midfoot_strike": "중족부 착지", "forefoot_strike": "전족부 착지" },
+                purpose: { "health": "건강 관리", "record": "기록 단축", "marathon": "장거리 훈련", "rehab": "마라톤 완주" },
+                budget: { "budget_low": "10만원 이하", "budget_mid": "10-20만원", "budget_high": "20만원 이상" }
+            };
+
+            document.getElementById('summaryPersonalInfo').innerText = `성별: ${summaryMapping.gender[userChoices.gender] || '-'}, 연령: ${summaryMapping.age[userChoices.age] || '-'}, 사이즈: ${userChoices.shoeSize || '-'}mm`;
+            document.getElementById('summaryExperience').innerText = `${summaryMapping.experience[userChoices.experience] || '-'} (주 ${userChoices.weeklyDistance || 0}km)`;
+            
+            const footShape = userChoices.step3 || {};
+            document.getElementById('summaryFoot').innerText = `발볼: ${footShape.foot_width || '-'}, 아치: ${summaryMapping.arch[userChoices.arch] || '-'}`;
+            
+            const runningPattern = userChoices.step4 || {};
+            document.getElementById('summaryPattern').innerText = `착지: ${summaryMapping.strike[userChoices.strike] || '-'}, 표면: ${runningPattern.surface || '-'}`;
+
+            document.getElementById('summaryPurpose').innerText = summaryMapping.purpose[userChoices.purpose] || '-';
+            
+            const injury = userChoices.step6 || {};
+            document.getElementById('summaryInjury').innerText = injury.injury || '-';
+
+            document.getElementById('summaryBrands').innerText = userChoices.selectedBrands.length > 0 ? userChoices.selectedBrands.join(', ') : '선택 안함';
+            document.getElementById('summaryBudget').innerText = summaryMapping.budget[userChoices.budget] || '-';
         }
         
-        // Initialize
-        updateProgress();
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize the first step
+            showStep(currentStep);
+        });
     </script>
 </body>
 </html>
